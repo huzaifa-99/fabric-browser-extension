@@ -10,7 +10,7 @@ This extension is a hobby project designed for experimental purposes. Please not
 
 ## Installation
 
-You can install the Fabric Browser Extension from the [Chrome Web Store](#) or manually load it as an unpacked extension:
+You can install the Fabric Browser Extension by manually loading it as an unpacked extension:
 
 1. Clone this repository or download and extract the ZIP file.
 2. Open Google Chrome and navigate to `chrome://extensions/`.
