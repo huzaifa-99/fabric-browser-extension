@@ -1,0 +1,383 @@
+<style>
+    .settings-modal {
+        --color-link: rgb(126 126 132);
+        --color-border: #ebe3e3;
+        --color-heading: black;
+        --color-text: gray;
+        --color-bg: white;
+        --color-btn-bg: gray;
+        --color-slider-bg-uncheck: #ccc;
+        --color-slider-bg-check: gray;
+        --color-modal-box-shadow: rgba(143, 143, 143, 1);
+        --color-modal-bg: rgba(0, 0, 0, 0.25);
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: var(--color-modal-bg);
+        z-index: 99999;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .settings-modal {
+            --color-border: rgb(45, 45, 45);
+            --color-heading: white;
+            --color-text: rgb(171, 168, 168);
+            --color-bg: #100f0f;
+            --color-slider-bg-uncheck: #727070;
+            --color-slider-bg-check: #4c4a4a;
+            --color-modal-box-shadow: rgb(62 61 61);
+            --color-modal-bg: rgba(91, 91, 91, 0.25);
+        }
+    }
+
+    * {
+        color: var(--color-text);
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .settings-container {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: fixed;
+        width: 400px;
+        max-width: 90%;
+        border-radius: 8px;
+        background-color: var(--color-bg);
+        border: 1px solid var(--color-border);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 16px;
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        z-index: 99999;
+        box-shadow: 0px 0px 13px 0px var(--color-modal-box-shadow);
+    }
+
+    h1 {
+        color: var(--color-heading);
+        font-size: 16px;
+        line-height: 18px;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
+
+    p {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+    }
+
+    a {
+        color: var(--color-text);
+    }
+
+    a:visited,
+    a:hover,
+    a:focus,
+    a:active {
+        color: var(--color-text);
+    }
+
+    button {
+        all: unset;
+        background: var(--color-btn-bg);
+        color: var(--color-bg);
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-size: 12px;
+        line-height: 14px;
+        cursor: pointer;
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 0;
+        border-top: 1px solid var(--color-border) !important;
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    section div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-content: center !important;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    header .left {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    header .close-btn {
+        all: unset !important;
+    }
+
+    header .close-btn,
+    header .close-btn svg {
+        cursor: pointer;
+        font-size: 24px;
+        height: 24px;
+        width: 24px;
+        color: var(--color-text);
+    }
+
+    #new-version-available {
+        display: none;
+    }
+
+    #version-update-loader {
+        display: none;
+    }
+
+    .patterns-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        width: 100%
+    }
+
+    .patterns-selector {
+        width: 100%;
+        background-color: var(--color-bg);
+        cursor: pointer;
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 6px;
+        border: 1px solid var(--color-border);
+        color: gray;
+    }
+
+    .patterns-selector:focus-within,
+    .patterns-selector:focus {
+        border: 1px solid var(--color-border) !important;
+    }
+
+    .patterns-selector:disabled {
+        cursor: not-allowed;
+    }
+
+    .switch {
+        display: inline-block;
+        height: 20px;
+        position: relative;
+        width: 40px;
+    }
+
+    .switch input {
+        display: none;
+    }
+
+    .slider {
+        background-color: var(--color-slider-bg-uncheck);
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .4s;
+    }
+
+    .slider:before {
+        background-color: #fff;
+        bottom: 4px;
+        content: "";
+        height: 12px;
+        left: 4px;
+        position: absolute;
+        transition: .4s;
+        width: 12px;
+    }
+
+    input:checked+.slider {
+        background-color: var(--color-slider-bg-check);
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(20px);
+    }
+
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    .loading-container {
+        position: relative;
+        height: 16px;
+        width: 16px;
+    }
+
+    .loading-progress {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        border: 2px solid #ACCAFF36;
+        border-radius: 50%;
+
+        &::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #ACCAFF;
+            top: -2px;
+            left: -2px;
+            animation: spin 0.8s linear infinite;
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .tested-text {
+        margin: auto;
+        font-size: 10px;
+    }
+
+    #active-prompt-link {
+        margin-left: auto;
+        margin-top: 2px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        line-height: 16px;
+    }
+
+    #active-prompt-link svg {
+        font-size: 12px;
+        height: 12px;
+        width: 12px;
+    }
+
+    .pb-0 {
+        padding-bottom: 0 !important;
+    }
+
+    .links {
+        width: 100%;
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div class="settings-modal" id="settings-modal">
+    <div class="settings-container" id="settings-container">
+        <header>
+            <div class="left">
+                <h1>Fabric Patterns</h1>
+                <p>Settings</p>
+            </div>
+            <button class="close-btn" id="close-btn">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="200px"
+                    width="200px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z">
+                    </path>
+                </svg>
+            </button>
+        </header>
+
+        <section>
+            <div>
+                <p>Version</p>
+                <p id="fabric-version-number"></p>
+            </div>
+
+            <div id="new-version-available">
+                <p id="new-version-number">__NEW_VERSION__ is available</p>
+                <button id="update-version-button">Update</button>
+                <div class="loading-container" id="version-update-loader">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <p>Output markdown</p>
+                <label class="switch" for="output-markdown-switch">
+                    <input type="checkbox" id="output-markdown-switch" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <p>Use patterns</p>
+                <label class="switch" for="patterns-enabled-switch">
+                    <input type="checkbox" id="patterns-enabled-switch" />
+                    <div class="slider round"></div>
+                </label>
+            </div>
+            <div class="patterns-container">
+                <select class="patterns-selector" id="patterns-selector">
+                </select>
+                <a target="_blank" id="active-prompt-link">
+                    Active pattern
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <p class="links">
+                <a href="https://github.com/huzaifa-99/fabric-browser-extension/issues/new" target="_blank">Report a
+                    bug</a>
+                •
+                <a href="https://github.com/huzaifa-99/fabric-browser-extension" target="_blank">View code</a>
+            </p>
+        </section>
+
+        <section class="pb-0">
+            <p class="tested-text">Tested on chatGPT's <a
+                    href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes#h_78b6147826"
+                    target="_blank">May 16, 2024</a> release.</p>
+        </section>
+    </div>
+</div>

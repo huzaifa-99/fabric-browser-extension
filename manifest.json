@@ -1,0 +1,42 @@
+{
+    "name": "Fabric Patterns",
+    "description": "Fabric Patterns",
+    "version": "1.01",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.chatgpt.com/*"
+            ],
+            "js": [
+                "scripts/content/content.js"
+            ],
+            "css": [
+                "scripts/content/global.css"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "background": {
+        "service_worker": "scripts/background.js"
+    },
+    "host_permissions": [
+        "https://github.com/"
+    ],
+    "action": {},
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "scripts/content/settings-modal.html"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+.fabric-button {
+    width: fit-content;
+    position: absolute;
+    bottom: -4px;
+    right: 46px;
+    transform: translatey(-50%);
+    background: #423d3d;
+    color: white;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .fabric-button {
+        background: white;
+        color: black;
+    }
+}
+
+@media (min-width: 768px) {
+    .fabric-button {
+        right: 50px;
+    }
+}
