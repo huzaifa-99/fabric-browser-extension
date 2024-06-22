@@ -6,7 +6,11 @@ It includes settings to choose b/w fabric patterns, disable/enable them per need
 
 This extension is a hobby project designed for experimental purposes. Please note that not all Fabric prompts may work as intended with ChatGPT.
 
+<div style="max-width: 720px; margin: auto">
+
 ![Demo](./resources/demo.gif)
+
+</div>
 
 ## Installation
 
@@ -28,3 +32,6 @@ Once installed, the Fabric Browser Extension adds a button to the chat input in 
 ## Limitations
 
 ATM, the extension only supports ChatGPT and Chrome Browser.
+
+## Known Issues
+1. When [Grammerly](https://www.grammarly.com/) is installed, the extension settings button overlays the grammerly settings button. This issue might be reproducible with other extensions that modify/depend on a `textarea`/`input` element to function.
