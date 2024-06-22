@@ -4,8 +4,9 @@
     bottom: -4px;
     right: 46px;
     transform: translatey(-50%);
-    background: #423d3d;
+    background: black;
     color: white;
+    font-weight: bold;
     border-radius: 8px;
     width: 30px;
     height: 30px;
