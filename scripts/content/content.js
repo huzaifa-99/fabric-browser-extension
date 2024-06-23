@@ -266,8 +266,6 @@ async function mountExtensionToChatGPT({ extensionElements }) {
         // return early if button is of 'stop' variant
         const ATTR_dataTestId = chatGPTElements.sendbtn.getAttribute('data-testid') || ''
         if (ATTR_dataTestId.includes('stop')) {
-            e.preventDefault();
-            e.stopPropagation();
             return
         }
 
