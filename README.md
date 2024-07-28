@@ -1,12 +1,12 @@
 # Fabric Browser Extension
 
-Integrates GPT prompts (patterns) sourced from [Fabric](https://github.com/danielmiessler/fabric) directly into the ChatGPT's web interface on Chrome.
+Integrates GPT prompts (patterns) sourced from [Fabric](https://github.com/danielmiessler/fabric) directly into ChatGPT's web interface on Chrome.
 
-It includes settings to choose b/w fabric patterns, disable/enable them per need, and to output the GPT response in a standard or markdown format.
+It includes settings to choose b/w fabric patterns, disable/enable them per need, and output the GPT response in a standard or markdown format.
 
-This extension is a hobby project designed for experimental purposes. I plan to keep it updated but there is a chance that I might not be able to do that. As of now, the extension works with chatGPT's [latest release (May 16, 2024)](https://help.openai.com/en/articles/6825453-chatgpt-release-notes#h_78b6147826) 
+This extension is a hobby project designed for experimental purposes. I plan to keep it updated but there is a chance that I might not be able to do that. As of now, the extension works with chatGPT's [release version (July 18, 2024)](https://help.openai.com/en/articles/6825453-chatgpt-release-notes#h_5ce52d9f14)
 
-Also, not all Fabric prompts may work as intended with ChatGPT and may lead to incorrect results.
+Also, not all Fabric prompts may work as intended with ChatGPT, which may lead to incorrect results.
 
 <div style="max-width: 720px; margin: auto">
 
@@ -36,4 +36,4 @@ Once installed, the Fabric Browser Extension adds a button to the chat input in 
 ATM, the extension only supports ChatGPT and Chrome Browser.
 
 ## Known Issues
-1. When [Grammerly](https://www.grammarly.com/) is installed, the extension settings button overlays the grammerly settings button. This issue might be reproducible with other extensions that modify/depend on a `textarea`/`input` element to function.
+1. When [Grammerly](https://www.grammarly.com/) is installed, the extension settings button overlays the Grammerly settings button. This issue might be reproducible with other extensions that modify/depend on a `textarea`/`input` element to function.
